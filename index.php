@@ -1,4 +1,16 @@
 <?php
+
+//////////////////////////////////////
+//       			    //
+// @author John Cummings            //
+// Super globals homework for IS218 //
+// Note some super_globals are not  //
+// able to be used within this      //
+// scripts scope.                   //
+//            			    //
+//////////////////////////////////////
+
+
 // $GLOBALS allows you to use/reference all of the variables that are available
 // in the entire program compared to local variables only available inside 
 // a function. Returns it as an array with the variable names as keys.
@@ -46,5 +58,36 @@ echo '<br>$_FILES<br>';
 echo '<br>' . print_r($_FILES);
 echo '<br>This is empty because there are no files being passed into the php
 file.';
+
+// $_COOKIE allows you to access the array of variables which are passed
+// to the current script via HTTP cookies
+$cookie_name = 'name';
+$cookie_value = 'John';
+setcookie($cookie_name, $cookie_value, time() + (86400*30), "/");
+echo '<br>$_COOKIE<br>';
+echo '<br>Hello ' . htmlspecialchars($_COOKIE["name"]) . '!';
+
+// $_SESSION superglobal is an array of all of the session variables
+// available to the current script
+session_start();
+$_SESSION['color'] = 'blue';
+$_SESSION['name'] = 'John';
+
+echo '<br>';
+echo $_SESSION['name'] . ' likes the color ' . $_SESSION['color'];
+echo '<br>';
+
+// S_REQUEST has ALL of the contents of $_GET, $_POST, and $_COOKIE all 
+// put together into one array
+echo '<br><br>';
+var_dump($_REQUEST); //This won't do anything because there was no variables
+// Passed before runtime
+
+// $_ENV is an array of variables which were passed into the current 
+// script from the environment method. They are almost like the
+// GLOBAL global variables in a way.
+echo '<br><br>';
+echo 'My username is ' . $_ENV["USER"] . '!';
+echo '<br>';
 
 ?>
